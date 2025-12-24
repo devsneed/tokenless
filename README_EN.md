@@ -1,25 +1,23 @@
 # tokenless
 
-English | [中文](./README.md)
-
 Reduce 60% token usage with one line of code.
 
-## 1. How It Works
+## How It Works
 
 Provides a data format/protocol to convert JSON and Markdown into tokenless format, reducing token count.
 
 LLMs are called via APIs using JSON and Markdown formats. These formats are human-readable, but in most business scenarios, data is exchanged between applications and LLMs programmatically. By removing formatting characters, we can reduce token count without changing the meaning.
 
-## 2. Design Goals
+## Goals
 
 - Accuracy: Preserve original meaning
 - Usability: Easy integration with existing projects
 - Focus: Prioritize high-impact optimizations (e.g., tabular data)
 - Versatility: Handle mixed formats
 
-## 3. Conversion Rules
+## Conversion Rules
 
-### 3.1 Array of Objects → CSV
+### Array of Objects → CSV
 
 Original:
 ```json
@@ -38,20 +36,14 @@ Bob,30,Shanghai
 
 Token reduction: ~67%
 
-### 3.2 JSON → Simplified YAML
-
-Convert JSON to simplified YAML: no space after colon, single space indentation.
+### JSON → Simplified YAML
 
 Original:
 ```json
 {
   "user": {
     "name": "Alice",
-    "age": 25,
-    "address": {
-      "city": "Beijing",
-      "street": "Main St"
-    }
+    "age": 25
   },
   "active": true
 }
@@ -62,73 +54,27 @@ Converted:
 user
  name:Alice
  age:25
- address
-  city:Beijing
-  street:Main St
 active:1
 ```
 
-Token reduction: ~60%
-
 Differences from standard YAML:
+- No space after colon
+- Single space indentation
+- Boolean: 1/0 instead of true/false
 
-| Item | Standard YAML | tokenless |
-|------|---------------|-----------|
-| Key-value separator | `: ` (colon + space) | `:` (colon only) |
-| Indentation | 2 spaces | 1 space |
-| Boolean | true/false | 1/0 |
-| Object marker | `key:` + newline | `key` + newline |
+Token reduction: ~50-60%
 
-### 3.3 Nested Array Handling
+### Markdown Simplification
 
-Original:
-```json
-{
-  "departments": [
-    {
-      "name": "R&D",
-      "employees": [
-        {"name": "Alice", "role": "Frontend"},
-        {"name": "Bob", "role": "Backend"}
-      ]
-    }
-  ]
-}
-```
+- Remove heading markers (`#`)
+- Remove bold/italic markers (`**`, `*`)
+- Replace horizontal rules with newline
+- Collapse multiple whitespace
+- Convert tables to CSV
 
-Converted:
-```
-departments
- -
-  name:R&D
-  employees
-   name,role
-   Alice,Frontend
-   Bob,Backend
-```
+Token reduction: ~30-50%
 
-Token reduction: ~60%
-
-Note: Use `-` for array elements, leaf-level object arrays convert to CSV format.
-
-### 3.4 Markdown Processing
-
-| Item | Original | Converted | Reduction |
-|------|----------|-----------|-----------|
-| Headings | `# Title` | `Title` | 50% |
-| Bold/Italic | `**text**` | `text` | 33% |
-| Horizontal rule | `---` | newline | 37% |
-| Extra whitespace | multiple | single | 33% |
-| Tables | MD table | CSV | 57% |
-
-## 4. Expected Results
-
-- JSON: ~50-60% reduction
-- Markdown: ~30-50% reduction
-
-## 5. SDK
-
-Three language SDKs available:
+## SDK
 
 | Language | Directory | Install |
 |----------|-----------|---------|
@@ -158,6 +104,6 @@ String result = Tokenless.tokenless(data);
 
 See each SDK directory for detailed documentation.
 
-## 6. License
+## License
 
 [MIT](./LICENSE)
