@@ -1,4 +1,7 @@
 # tokenless
+
+[English](./README_EN.md) | 中文
+
 一行代码降低60%的token量。
 
 ## 实现原理
@@ -270,3 +273,8 @@ String result = Tokenless.tokenless(data);
 ```
 
 详细使用说明请查看各SDK目录下的README文档。
+
+
+## 许可证
+
+[MIT](./LICENSE)
