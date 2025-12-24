@@ -1,0 +1,13 @@
+[project]
+name = "tokenless"
+version = "1.0.0"
+description = "一行代码降低60%的token量"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

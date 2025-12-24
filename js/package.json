@@ -1,0 +1,12 @@
+{
+  "name": "tokenless",
+  "version": "1.0.0",
+  "description": "一行代码降低60%的token量",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": ["tokenless", "llm", "token", "compression"],
+  "license": "MIT"
+}

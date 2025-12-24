@@ -1,0 +1,69 @@
+{
+  "description": "tokenless SDK 通用测试用例",
+  "testCases": [
+    {
+      "name": "表格类数据处理",
+      "input": [
+        {"name": "张三", "age": 25, "city": "北京"},
+        {"name": "李四", "age": 30, "city": "上海"},
+        {"name": "王五", "age": 28, "city": "广州"}
+      ],
+      "expected": "name,age,city\n张三,25,北京\n李四,30,上海\n王五,28,广州"
+    },
+    {
+      "name": "简单JSON对象",
+      "input": {
+        "user": {
+          "name": "张三",
+          "age": 25,
+          "address": {
+            "city": "北京",
+            "street": "长安街"
+          }
+        },
+        "active": true
+      },
+      "expected": "user\n name:张三\n age:25\n address\n  city:北京\n  street:长安街\nactive:1"
+    },
+    {
+      "name": "嵌套数组处理",
+      "input": {
+        "departments": [
+          {
+            "name": "研发部",
+            "employees": [
+              {"name": "张三", "role": "前端"},
+              {"name": "李四", "role": "后端"}
+            ]
+          }
+        ]
+      },
+      "expected": "departments\n -\n  name:研发部\n  employees\n   name,role\n   张三,前端\n   李四,后端"
+    },
+    {
+      "name": "Markdown标题处理",
+      "input": "# 一级标题\n## 二级标题\n### 三级标题",
+      "expected": "一级标题\n二级标题\n三级标题"
+    },
+    {
+      "name": "Markdown加粗斜体处理",
+      "input": "这是**重点内容**，还有*斜体文字*和***粗斜体***",
+      "expected": "这是重点内容，还有斜体文字和粗斜体"
+    },
+    {
+      "name": "Markdown分割线处理",
+      "input": "上文内容\n\n---\n\n下文内容",
+      "expected": "上文内容\n下文内容"
+    },
+    {
+      "name": "Markdown多余空白处理",
+      "input": "第一段内容\n\n\n\n第二段内容    有很多    空格",
+      "expected": "第一段内容\n第二段内容 有很多 空格"
+    },
+    {
+      "name": "Markdown表格处理",
+      "input": "| 姓名 | 年龄 | 城市 |\n|------|------|------|\n| 张三 | 25   | 北京 |\n| 李四 | 30   | 上海 |",
+      "expected": "姓名,年龄,城市\n张三,25,北京\n李四,30,上海"
+    }
+  ]
+}

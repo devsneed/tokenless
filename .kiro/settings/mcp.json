@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@executeautomation/playwright-mcp-server"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--headless=true",
+        "--isolated=true",
+        "--viewport=1920x1080",
+        "--port=9222"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "浏览器调试权限",
+        "网络请求捕获",
+        "页面截图",
+        "DOM 操作",
+        "性能分析",
+        "list_pages",
+        "navigate_page",
+        "take_snapshot",
+        "list_network_requests",
+        "take_screenshot",
+        "list_console_messages",
+        "click",
+        "evaluate_script",
+        "fill",
+        "wait_for",
+        "press_key",
+        "new_page",
+        "fill_form"
+      ]
+    }
+  }
+}
